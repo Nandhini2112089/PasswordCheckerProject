@@ -4,13 +4,14 @@ pipeline {
     environment {
         VENV_PATH = "${WORKSPACE}/venv/bin"
         PATH = "${VENV_PATH}:${env.PATH}"
-        DEST_PATH = "${WORKSPACE}/artifact_output"
     }
 
     stages {
         stage("Setup Virtualenv & Install Dependencies") {
             steps {
                 sh """
+                    apt-get update
+                    apt-get install -y zip
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
@@ -31,15 +32,14 @@ pipeline {
         stage("Zip Build") {
             steps {
                 sh """
-                    mkdir -p ${DEST_PATH}
-                    zip -r ${DEST_PATH}/password_checker.zip bin/password_checker
+                    zip -r password_checker.zip bin/password_checker
                 """
             }
         }
 
         stage("Archive") {
             steps {
-                archiveArtifacts artifacts: "${DEST_PATH}/password_checker.zip", allowEmptyArchive: true
+                archiveArtifacts artifacts: "password_checker.zip", allowEmptyArchive: true
             }
         }
     }
