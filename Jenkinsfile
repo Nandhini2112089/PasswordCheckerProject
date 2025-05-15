@@ -41,6 +41,7 @@ pipeline {
         stage('Archive') {
             steps {
                 println "hello"
+                println Test
                 archiveArtifacts artifacts: 'artifact_output/password_checker.zip', allowEmptyArchive: false
             }
         }
