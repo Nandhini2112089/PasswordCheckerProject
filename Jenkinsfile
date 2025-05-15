@@ -29,6 +29,8 @@ pipeline {
 
         stage('Archive') {
             steps {
+                println "check here"
+                println Test
                 archiveArtifacts artifacts: 'bin/**/*', allowEmptyArchive: true
 
             }
