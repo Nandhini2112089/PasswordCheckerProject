@@ -10,8 +10,6 @@ pipeline {
         stage("Setup Virtualenv & Install Dependencies") {
             steps {
                 sh """
-                    apt-get update
-                    apt-get install -y zip
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
