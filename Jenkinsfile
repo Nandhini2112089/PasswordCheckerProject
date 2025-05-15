@@ -29,7 +29,8 @@ pipeline {
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'bin/*', fingerprint: true
+                archiveArtifacts artifacts: 'bin/**/*', allowEmptyArchive: true
+
             }
         }
     }
