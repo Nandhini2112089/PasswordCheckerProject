@@ -4,40 +4,43 @@ pipeline {
     environment {
         VENV_PATH = "${WORKSPACE}/venv/bin"
         PATH = "${VENV_PATH}:${env.PATH}"
+        DEST_PATH = "${WORKSPACE}/artifact_output"
     }
 
     stages {
-        stage("Setup Virtualenv & Install Dependencies") {
+        stage('Setup Virtualenv & Install Dependencies') {
             steps {
-                sh """
+                sh '''
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
                     pip install pyinstaller fastapi uvicorn pydantic
-                """
+                '''
             }
         }
 
-        stage("Build Package") {
+        stage('Build Package') {
             steps {
-                sh """
+                sh '''
                     . venv/bin/activate
                     pyinstaller -y password_checker/main.py --distpath bin --name password_checker --paths password_checker/app
-                """
+                '''
             }
         }
 
-        stage("Zip Build") {
+        stage('Zip Build') {
             steps {
-                sh """
-                    zip -r password_checker.zip bin/password_checker
-                """
+                sh '''
+                    mkdir -p ${DEST_PATH}
+                    cd bin
+                    zip -r ${DEST_PATH}/password_checker.zip password_checker
+                '''
             }
         }
 
-        stage("Archive") {
+        stage('Archive') {
             steps {
-                archiveArtifacts artifacts: "password_checker.zip", allowEmptyArchive: true
+                archiveArtifacts artifacts: 'artifact_output/password_checker.zip', allowEmptyArchive: false
             }
         }
     }
