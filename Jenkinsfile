@@ -41,7 +41,7 @@ pipeline {
         stage('Archive') {
             steps {
                 println "Built"
-                println By whom
+                println By_whom
                 archiveArtifacts artifacts: 'artifact_output/password_checker.zip', allowEmptyArchive: false
             }
         }
