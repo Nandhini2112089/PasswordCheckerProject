@@ -6,9 +6,10 @@ pipeline {
     }
 
     stages {
-        stage('Check Docker Daemon') {
+        stage('Check Docker Access') {
             steps {
-                sh 'sudo systemctl is-active docker || sudo systemctl start docker'
+                sh 'docker --version'
+                sh 'docker ps'
             }
         }
 
