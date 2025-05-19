@@ -3,7 +3,7 @@ pipeline {
 
    environment {
     DOCKERHUB_USER = "sivanandhini23"
-    IMAGE_NAME = "${DOCKERHUB_USER}/password-checker"
+    IMAGE_NAME = "${DOCKERHUB_USER}/password-validator"
 }
 
     stages {
