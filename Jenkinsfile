@@ -20,12 +20,11 @@ pipeline {
         }
 
         stage('Login to Docker Hub') {
-            steps {
-                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerbubpwd')]) {
-                    sh 'docker login -u sivanandhini23 -p $(dockerbubpwd)'
-                }
-            }
-        }
+    steps {
+        sh 'docker login -u sivanandhini23 -p Nandhini23'
+    }
+}
+
 
         stage('Push Docker Image') {
             steps {
