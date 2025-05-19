@@ -6,7 +6,12 @@ pipeline {
     }
 
     stages {
-       
+        stage('Check Docker Daemon') {
+            steps {
+                sh 'sudo systemctl is-active docker || sudo systemctl start docker'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME .'
