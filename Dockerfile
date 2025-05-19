@@ -8,4 +8,4 @@ EXPOSE 8081
 
 RUN chmod +x /app/password_checker/password_checker
 
-ENTRYPOINT ["./password_checker"]
+ENTRYPOINT ["/app/password_checker/password_checker"]
