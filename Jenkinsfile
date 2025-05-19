@@ -1,9 +1,10 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "password-checker"
-    }
+   environment {
+    DOCKERHUB_USER = "sivanandhini23"
+    IMAGE_NAME = "${DOCKERHUB_USER}/password-checker"
+}
 
     stages {
         stage('Check Docker Access') {
