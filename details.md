@@ -1,7 +1,5 @@
 ---
 
-# Password Strength Checker - Kubernetes Deployment
-
 This document explains how to deploy an image from Docker Hub using Kubernetes.
 
 ---
